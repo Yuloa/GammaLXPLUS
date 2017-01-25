@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+
+void addVariables()
+{
+  TFile* file = new TFile(filename.c_str(),"UPDATE"); 
+  TTree *tree = (TTree*)file->Get("DecayTree");
+  
+  Double_t p1_px = -999;
+  Double_t p1_py = -999;
+  Double_t p1_pz = -999;
+  Double_t p1_px = -999;
+  
+  

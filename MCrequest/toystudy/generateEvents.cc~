@@ -1,0 +1,141 @@
+#include "TLorentzVector.h"
+#include "TGenPhaseSpace.h"
+#include "TFile.h"
+#include "TTree.h"
+#include "TBranch.h"
+#include <iostream>
+using namespace std;
+
+int main(){
+  
+  const unsigned int nbody = 4;
+  
+  const double mass_D0 = 1.86486;    //GeV
+  const double mass_pi = 0.13957018;  // GeV
+  
+  
+  TLorentzVector D0( 0.0, 0.0, 0.0, mass_D0 );
+  const vector<double> fs_masses = {mass_pi, mass_pi, mass_pi, mass_pi};
+  
+  TGenPhaseSpace generator;
+  generator.SetDecay(D0, nbody, fs_masses.data());
+
+  TFile file("/afs/cern.ch/user/c/cprouve/Gamma/MCrequest/toystudy/test.root", "recreate");
+  TTree tree("testtree", "treetest");
+
+  float p1p = -999;
+  float p1px = -999;
+  float p1py = -999;
+  float p1pz = -999;
+  float p1e = -999;
+  float p1m = -999;
+
+  float p2p = -999;
+  float p2px = -999;
+  float p2py = -999;
+  float p2pz = -999;
+  float p2e = -999;
+  float p2m = -999;
+  
+  float p3p = -999;
+  float p3px = -999;
+  float p3py = -999;
+  float p3pz = -999;
+  float p3e = -999;
+  float p3m = -999;
+  
+  float p4p = -999;
+  float p4px = -999;
+  float p4py = -999;
+  float p4pz = -999;
+  float p4e = -999;
+  float p4m = -999;
+
+  TBranch* b_p1p = tree.Branch("Pion1_P", &p1p, "Pion1_P/f" );
+  TBranch* b_p1px = tree.Branch("Pion1_PX", &p1px, "Pion1_PX/f" );
+  TBranch* b_p1py = tree.Branch("Pion1_PY", &p1py, "Pion1_PY/f" );
+  TBranch* b_p1pz = tree.Branch("Pion1_PZ", &p1pz, "Pion1_PZ/f" );
+  TBranch* b_p1e = tree.Branch("Pion1_E", &p1e, "Pion1_E/f" );
+  TBranch* b_p1m = tree.Branch("Pion1_M", &p1m, "Pion1_M/f" );
+  
+  TBranch* b_p2p = tree.Branch("Pion2_P", &p2p, "Pion2_P/f" );
+  TBranch* b_p2px = tree.Branch("Pion2_PX", &p2px, "Pion2_PX/f" );
+  TBranch* b_p2py = tree.Branch("Pion2_PY", &p2py, "Pion2_PY/f" );
+  TBranch* b_p2pz = tree.Branch("Pion2_PZ", &p2pz, "Pion2_PZ/f" );
+  TBranch* b_p2e = tree.Branch("Pion2_E", &p2e, "Pion2_E/f" );
+  TBranch* b_p2m = tree.Branch("Pion2_M", &p2m, "Pion2_M/f" );
+  
+  TBranch* b_p3p = tree.Branch("Pion3_P", &p3p, "Pion3_P/f" );
+  TBranch* b_p3px = tree.Branch("Pion3_PX", &p3px, "Pion3_PX/f" );
+  TBranch* b_p3py = tree.Branch("Pion3_PY", &p3py, "Pion3_PY/f" );
+  TBranch* b_p3pz = tree.Branch("Pion3_PZ", &p3pz, "Pion3_PZ/f" );
+  TBranch* b_p3e = tree.Branch("Pion3_E", &p3e, "Pion3_E/f" );
+  TBranch* b_p3m = tree.Branch("Pion3_M", &p3m, "Pion3_M/f" );
+  
+  TBranch* b_p4p = tree.Branch("Pion4_P", &p4p, "Pion4_P/f" );
+  TBranch* b_p4px = tree.Branch("Pion4_PX", &p4px, "Pion4_PX/f" );
+  TBranch* b_p4py = tree.Branch("Pion4_PY", &p4py, "Pion4_PY/f" );
+  TBranch* b_p4pz = tree.Branch("Pion4_PZ", &p4pz, "Pion4_PZ/f" );
+  TBranch* b_p4e = tree.Branch("Pion4_E", &p4e, "Pion4_E/f" );
+  TBranch* b_p4m = tree.Branch("Pion4_M", &p4m, "Pion4_M/f" );
+  
+  float d0p = -999;
+  float d0px = -999;
+  float d0py = -999;
+  float d0pz = -999;
+  float d0e = -999;
+  float d0m = -999;
+  TBranch* b_d0p = tree.Branch("D0_P", &d0p, "D0_P/f" );
+  TBranch* b_d0px = tree.Branch("D0_PX", &d0px, "D0_PX/f" );
+  TBranch* b_d0py = tree.Branch("D0_PY", &d0py, "D0_PY/f" );
+  TBranch* b_d0pz = tree.Branch("D0_PZ", &d0pz, "D0_PZ/f" );
+  TBranch* b_d0e = tree.Branch("D0_E", &d0e, "D0_E/f" );
+  TBranch* b_d0m = tree.Branch("D0_M", &d0m, "D0_M/f" );
+  
+  vector<TBranch*> b_px = {b_p1px, b_p2px, b_p3px, b_p4px};
+  vector<TBranch*> b_px = {b_p1px, b_p2px, b_p3px, b_p4px};
+  vector<TBranch*> b_px = 
+    {
+      b_p1px, b_p2px, b_p3px, b_p4px
+    }
+  ;
+  
+  vector<TBranch*> b_px = 
+    {      b_p1px, b_p2px, b_p3px, b_p4px};
+  
+  
+
+  double event;
+  for(int i = 0; i<10; i++)
+  {
+    event = generator.Generate();
+    p1px = generator.GetDecay(0)->Px();
+    
+
+
+    b_p1px->Fill();
+    tree.Fill();
+
+    cout << endl << endl;
+    
+    event = generator.Generate();
+    cout << event << endl;
+    cout << generator.GetDecay(0)->Px() << endl;
+    cout << generator.GetDecay(1)->Px() << endl;
+    cout << generator.GetDecay(2)->Px() << endl;
+    cout << generator.GetDecay(3)->Px() << endl;
+    p1px = generator.GetDecay(0)->Px();
+    b_p1px->Fill();
+    tree.Fill();
+    
+
+    tree.Write();
+    file.Write();
+    
+    
+    //}
+  
+  
+}
+
+
